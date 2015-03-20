@@ -3,10 +3,10 @@
 % hp -- highpass
 % bp -- bandpass
 % ap -- allpass
-function [c0,c1,c2,c3,c4] = cookEQ(Fs,f0,dBgain,Q,filterType)
+function [c0,c1,c2,c3,c4,b0,b1,b2,a0,a1,a2] = cookEQ(Fs,f0,dBgain,Q,filterType)
 
 
-if ((filterType == 'peak') || (filterType == 'highShelf') || (filterType == 'lowShelf'))
+if (strcmp(filterType,'peak') || strcmp(filterType,'highShelf') || strcmp(filterType,'lowShelf'))
   A  = sqrt(10^(dBgain/40));
 else
   A  = sqrt(10^(dBgain/20));
