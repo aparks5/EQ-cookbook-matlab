@@ -3,17 +3,17 @@
 % hp -- highpass
 % bp -- bandpass
 % ap -- allpass
-function [c0,c1,c2,c3,c4,b0,b1,b2,a0,a1,a2] = cookEQ(Fs,f0,dBgain,Q,filterType)
+function [arr] = cookEQ(Fs,f0,dBgain,Q,filterType)
 
 
-if (strcmp(filterType,'peak') || strcmp(filterType,'highShelf') || strcmp(filterType,'lowShelf'))
+if (strcmp(filterType,'peak') || strcmp(filterType,'lowShelf') || strcmp(filterType,'highShelf'))
   A  = sqrt(10^(dBgain/40));
 else
   A  = sqrt(10^(dBgain/20));
 end
 
 w0 = 2*pi*f0/Fs;
-alpha = sin(w0)/(2*Q);
+alpha = sin(w0)/(2*Q);  
 
 
 switch filterType
@@ -80,3 +80,6 @@ c1 = b1/a0;
 c2 = b2/a0;
 c3 = a1/a0;
 c4 = a2/a0;
+
+arr = [c0 c1 c2 1 c3 c4];
+    
